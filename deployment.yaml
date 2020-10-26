@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: spring-config-docker
+  name: spring-config-docker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-config-docker
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: spring-config-docker
+    spec:
+      containers:
+      - image: asmanaeem/spring-config-docker
+        name: spring-config-docker
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: spring-config-docker
+  name: spring-config-docker
+spec:
+  ports:
+  - name: 9001-9001
+    port: 9001
+    protocol: TCP
+    targetPort: 9001
+  selector:
+    app: spring-config-docker
+  type: ClusterIP
+status:
+  loadBalancer: {}
